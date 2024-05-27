@@ -9,6 +9,7 @@ import { Books } from "./pages/Books"
 import { ChangeBook } from "./pages/ChangeBook"
 import { Authors } from "./pages/Authors"
 import { ChangeAuthors } from "./pages/ChangeAuthors"
+import {NextUIProvider} from "@nextui-org/react";
 
 const router = createBrowserRouter([
   {
@@ -36,7 +37,9 @@ if (container) {
   root.render(
     <React.StrictMode>
       <Provider store={store}>
+      <NextUIProvider>
       <RouterProvider router={router} />
+      </NextUIProvider>
       </Provider>
     </React.StrictMode>,
   )

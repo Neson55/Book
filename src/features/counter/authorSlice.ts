@@ -7,13 +7,20 @@ export interface AuthorSliceState {
     idAuthor: number[]
     name: string
     listAuthor: string[]
-    
+    nameBook: string 
+    arrayBook: string[]
+    yearBook: number
+    arrayYear: number[]    
 }
 
 const initialState: AuthorSliceState = {
     idAuthor: [],
     name: "",
     listAuthor: [],
+    nameBook: "",
+    arrayBook: [],
+    yearBook: 0,
+    arrayYear: [],
 }
 
 export const authorSlice = createAppSlice({
@@ -28,15 +35,23 @@ export const authorSlice = createAppSlice({
         addIdAuthor: create.reducer(state => {
             state.idAuthor = [...state.idAuthor, new Date().getTime() ]
           }),
+        addInListBook: create.reducer( (state, action: PayloadAction<String>) => {
+                state.arrayBook = [...state.arrayBook, state.nameBook + action.payload]
+        }),
+        addInListYear: create.reducer( (state, action: PayloadAction<number>) => {
+            state.arrayYear = [...state.arrayYear, state.yearBook + action.payload]
+    }),
         
     }),
         
     selectors: {
         selectListAuthor: author => author.listAuthor,
-        selectIdAuthor: id => id.idAuthor
+        selectIdAuthor: id => id.idAuthor,
+        selectListBook: book => book.arrayBook,
+        selectListYear: year => year.arrayYear,
     },
 })
 
-export const { addInListAuthor,addIdAuthor } = authorSlice.actions
+export const { addInListAuthor,addIdAuthor,addInListBook,addInListYear } = authorSlice.actions
 
-export const {selectListAuthor,selectIdAuthor} = authorSlice.selectors
+export const {selectListAuthor,selectIdAuthor, selectListBook, selectListYear} = authorSlice.selectors
