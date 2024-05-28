@@ -41,6 +41,11 @@ export const authorSlice = createAppSlice({
         addInListYear: create.reducer( (state, action: PayloadAction<number>) => {
             state.arrayYear = [...state.arrayYear, state.yearBook + action.payload]
     }),
+         addInListBookAuthor: create.reducer( (state, action: PayloadAction<String>) => {
+            state.listAuthor = [...state.listAuthor.filter(item => !action.payload.includes(item))]
+
+
+}),
         
     }),
         
@@ -52,6 +57,6 @@ export const authorSlice = createAppSlice({
     },
 })
 
-export const { addInListAuthor,addIdAuthor,addInListBook,addInListYear } = authorSlice.actions
+export const { addInListAuthor,addIdAuthor,addInListBook,addInListYear, addInListBookAuthor } = authorSlice.actions
 
 export const {selectListAuthor,selectIdAuthor, selectListBook, selectListYear} = authorSlice.selectors

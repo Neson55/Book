@@ -14,6 +14,7 @@ export const ChangeAuthors = () => {
   return (
     <div  className=" justify-center ">
       <Navbar />
+      <h1 className='text-3xl flex justify-center mt-4'>Добавить автора</h1>
       <div  className='flex justify-center mt-14 gap-4'>
     <Input
     placeholder='ФИО'

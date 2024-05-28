@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
-import { addInListAuthor, addInListBook, addInListYear, selectListAuthor, selectListBook, selectListYear } from '../features/counter/authorSlice'
+import { addInListAuthor, addInListBook, addInListBookAuthor, addInListYear, selectListAuthor, selectListBook, selectListYear } from '../features/counter/authorSlice'
 import { Button, Input, Select, SelectItem } from '@nextui-org/react'
 import { Navbar } from '../Component/Navbar'
 
@@ -19,6 +19,7 @@ export const ChangeBook = () => {
    
     <div  className=" justify-center ">
       <Navbar />
+      <h1 className='text-3xl flex justify-center mt-4'>Добавить книгу</h1>
       <div  className='flex justify-center mt-14 gap-4'>
       <Input
        placeholder='Название книги'
@@ -62,7 +63,7 @@ export const ChangeBook = () => {
      onClick={() => {
       dispatch(addInListBook(book));
       dispatch(addInListYear(parseInt(year)))
-      dispatch(addInListAuthor(author));
+      dispatch(addInListBookAuthor(selectedAuthor));
       setYear('')
       setBook('');
     }}
@@ -81,7 +82,7 @@ export const ChangeBook = () => {
         </div>
         <div className=' text-3xl text-green-600 '>
         <h1 className='text-black'>Author:</h1>
-        {authorList.map((author, index) => <div key={index}>{author}</div>)}
+         <div> {selectedAuthor}</div> 
         </div>
       </div>
 
