@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
-import { addIdAuthor, addInListAuthor, selectIdAuthor, selectListAuthor } from '../features/counter/authorSlice'
+import { addIdAuthor, addInListAuthor, deleteAuthor, deleteAuthorId, selectIdAuthor, selectListAuthor } from '../features/counter/authorSlice'
 import { Button, Input } from '@nextui-org/react'
 import { Navbar } from '../Component/Navbar'
 
@@ -41,21 +41,34 @@ export const ChangeAuthors = () => {
     >Add Author</Button>
     </div>
     <div className='flex justify-center mt-6 gap-10'>
+        <div className=' text-3xl text-red-600 '>
+          <h1 className='text-black'>Id:</h1>
+          {idAuthor.map((el, index) => <div key={index}>{el}</div>)}
+        </div>
         <div className=' text-3xl  flex-col'>
           <h1>Author:</h1>
           {list.map((el, index) => <div key={index}>{el}</div>)}
         </div>
         <div className=' text-3xl text-red-600 '>
-          <h1 className='text-black'>Id:</h1>
-          {idAuthor.map((el, index) => <div key={index}>{el}</div>)}
-        </div>
-        <div className=' text-3xl text-red-600 '>
-          <h1 className='text-black'>Author & Id:</h1>
+          <h1 className='text-black'>Id: Author</h1>
           {list.map((author, index) => (
             <div key={index}>
-              {`"${author}", ${idAuthor[index]}`} 
+              {`  ${idAuthor[index]} "${author}"`}
+              <Button 
+          onClick={() => {
+            dispatch(deleteAuthor(author));
+            dispatch(deleteAuthorId(idAuthor[index]));
+          }}
+          >Delete</Button>
             </div>
           ))}
+        </div>
+        <div className=' text-3xl  flex-col'>
+        <h1>Количество книг:</h1>
+        </div>
+        <div className=' text-3xl  flex-col'>
+          <h1>Удалить</h1>
+          
         </div>
       </div>
 

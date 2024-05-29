@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
-import { addInListAuthor, addInListBook, addInListBookAuthor, addInListYear, selectListAuthor, selectListBook, selectListYear } from '../features/counter/authorSlice'
+import { addInListAuthor, addInListBook, addInListBookAuthor, addInListYear, selectListAuthor, selectListBook, selectListBookAuthor, selectListYear } from '../features/counter/authorSlice'
 import { Button, Input, Select, SelectItem } from '@nextui-org/react'
 import { Navbar } from '../Component/Navbar'
 
@@ -11,6 +11,7 @@ export const ChangeBook = () => {
   const bookList = useAppSelector(selectListBook)
   const yearList = useAppSelector(selectListYear)
   const authorList  = useAppSelector(selectListAuthor)
+  const authorListBook = useAppSelector(selectListBookAuthor)
   const [book, setBook] = useState('')
   const [year, setYear] = useState('')
   const [selectedAuthor, setSelectedAuthor] = useState('');
@@ -45,18 +46,19 @@ export const ChangeBook = () => {
       
      }}
      />
-     <Select
-          className='w-[300px]'
+     <select
+          className='w-[300px] border-indigo-900 border-5'
           aria-label="Select Author"
           onChange={(e) => setSelectedAuthor(e.target.value)}
           value={selectedAuthor}
+          
         >
           {authorList.map((author, index) => (
-            <SelectItem key={index} value={author}>
+            < option key={index} value={author}>
               {author}
-            </SelectItem>
+            </option>
           ))}
-        </Select>
+        </select>
     <Button 
      className=""
      aria-label="Add Author"
@@ -65,9 +67,10 @@ export const ChangeBook = () => {
       dispatch(addInListYear(parseInt(year)))
       dispatch(addInListBookAuthor(selectedAuthor));
       setYear('')
-      setBook('');
+      setBook('')
+      setSelectedAuthor('');
     }}
-    disabled={book === '' && year === ''&& selectedAuthor === ''}
+    disabled={book === '' && year === ''}
 
     >Добавить книгу</Button>
     </div>
@@ -82,7 +85,7 @@ export const ChangeBook = () => {
         </div>
         <div className=' text-3xl text-green-600 '>
         <h1 className='text-black'>Author:</h1>
-         <div> {selectedAuthor}</div> 
+         <div> {authorListBook.map((el, index) => <div key={index}>{el}</div>)}</div> 
         </div>
       </div>
 
